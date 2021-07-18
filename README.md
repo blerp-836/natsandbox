@@ -2,7 +2,7 @@
 **Disclaimer**
 All sensitive information (e.g tenant id, resource id, user name etc) has been redacted
 
-The code consists of two parts
+The code consists of three parts
 * Batch Ingestion of Youtube Data
 * Streaming Ingestion of Youtube Data
 * Serving layer using internal databricks hive metastore and unmanaged tables
