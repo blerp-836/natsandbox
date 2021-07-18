@@ -7,7 +7,7 @@ The code consists of two parts
 **The following diagram shows the end to end architecture**
 ![image](https://user-images.githubusercontent.com/78700027/126080681-fe57e9a0-97b6-457a-af40-f9f8bab058de.png)
 
-**The following diagram shows the end to end data flow
+**The following diagram shows the end to end data flow**
 
 ![image](https://user-images.githubusercontent.com/78700027/126081070-1e87c343-8c7e-47b1-8a09-3f545c9a4788.png)
 
@@ -30,11 +30,11 @@ There are 3 APIs being called
 1 VideoCategories
 1 Vide
 
-**i18nRegions and VideoCategories API
+**i18nRegions and VideoCategories API**
 
 The i18nRegions and VideoCategories are called directly using Python Request library and ingested to landing folder as json. The files are then converted to parquet in staging and further cleaned and restructured in integration
 
-**Video API
+**Video API**
 
 Video API is called through Python Request Library and passed through the event hub captured into a default landing directory configured in the Event Hub capture. Event hub default file type is avro. The avro file is then moved to landing directory. The content of the API call is included in the Body column and is in binary form. The code converts the binary column to json string and convert it to struct column in the parquet file. The parquet file is loaded to staging raw. The struct Body column is flatten out again in staging processed and loaded to a parquet file. The file is further cleaned and restructured in integration
 
