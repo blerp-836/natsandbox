@@ -45,21 +45,21 @@ class KeyVault():
             except ServiceRequestError:
                 if i < 3:
                     wait = 5 * (i +1)
-                    logger.warning('Unable to reach the KeyVault. retrying in {} seconds'.format(wait))
+                    logger.warning('service request error. try again in {} seconds'.format(wait))
                     time.sleep(wait)
                     continue
                 else:
-                    logger.error('Could not connect to the Azure Keyvault after {} tries. Check that the server is available'.format('4'))
+                    logger.error('service request error to the Azure Keyvault after {} tries '.format('4'))
                     raise
                     sys.exit(1)
 
             except ClientAuthenticationError:
-                logger.error('Credentials provided are invalid. Authentication failed.')
+                logger.error('client auth error. Authentication failed.')
                 raise
                 sys.exit(1)
 
             except ResourceNotFoundError:
-                logger.error('The requested secret: {} does not exist'.format(secret_name))
+                logger.error('resource not found keyvault secret: {} does not exist'.format(secret_name))
                 raise
                 sys.exit(1)
 

@@ -23,10 +23,10 @@ import json
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-j", "--job_name", required=True ,help="Job unique id for monitoring purposes, should be provided by support/devops team")
-    parser.add_argument("-a","--action", required=True, help="Action to be executed, possible values are [create-table | extract | load ]")
-    parser.add_argument("-t","--tbl", required=False, help="Table entity name")
-    parser.add_argument('-m','--mode',required=True, help="databricks priviledged dbutils token. need to be refreshed every 48 hours")
+    parser.add_argument("-j", "--job_name", required=True ,help="Job name for logging")
+    parser.add_argument("-a","--action", required=True, help="action to be executed by the code")
+    parser.add_argument("-t","--tbl", required=False, help="Table to loaded")
+    parser.add_argument('-m','--mode',required=True, help="local or dbfs")
 
     args = parser.parse_args()
     job_name = args.job_name
