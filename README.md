@@ -1,4 +1,7 @@
 # Batch and Streaming Pipelines using Youtube Data API on Azure
+**Disclaimer**
+All sensitive information (e.g tenant id, resource id, user name etc) has been redacted
+
 The code consists of two parts
 * Batch Ingestion of Youtube Data
 * Streaming Ingestion of Youtube Data
