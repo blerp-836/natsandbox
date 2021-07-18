@@ -2,6 +2,9 @@
 **Disclaimer**
 All sensitive information (e.g tenant id, resource id, user name etc) has been redacted
 
+ **Disclaimer**
+ Opinions expressed are solely my own and do not express the views or opinions of my employer
+
 The code consists of three parts
 * Batch Ingestion of Youtube Data
 * Streaming Ingestion of Youtube Data
