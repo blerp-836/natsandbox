@@ -1,0 +1,14 @@
+{
+	"name": "AzureDatabricks1",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain":"redacted" ,
+			"authentication": "MSI",
+			"workspaceResourceId":"redacted" ,
+			"existingClusterId": "redacted"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
+}

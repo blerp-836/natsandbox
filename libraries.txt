@@ -1,0 +1,86 @@
+{
+  "cluster_id": "0704-134105-zeros348",
+  "library_statuses": [
+    {
+      "library": {
+        "pypi": {
+          "package": "azure-common==1.1.27"
+        }
+      },
+      "status": "INSTALLED",
+      "is_library_for_all_clusters": false
+    },
+    {
+      "library": {
+        "pypi": {
+          "package": "azure-eventhub==5.5.0"
+        }
+      },
+      "status": "INSTALLED",
+      "is_library_for_all_clusters": false
+    },
+    {
+      "library": {
+        "pypi": {
+          "package": "azure-core==1.14.0"
+        }
+      },
+      "status": "INSTALLED",
+      "is_library_for_all_clusters": false
+    },
+    {
+      "library": {
+        "pypi": {
+          "package": "azure-identity==1.5.0"
+        }
+      },
+      "status": "INSTALLED",
+      "is_library_for_all_clusters": false
+    },
+    {
+      "library": {
+        "pypi": {
+          "package": "azure-keyvault-secrets==4.2.0"
+        }
+      },
+      "status": "INSTALLED",
+      "is_library_for_all_clusters": false
+    },
+    {
+      "library": {
+        "pypi": {
+          "package": "azure-storage-blob==12.8.1"
+        }
+      },
+      "status": "INSTALLED",
+      "is_library_for_all_clusters": false
+    },
+    {
+      "library": {
+        "pypi": {
+          "package": "azure-storage-common==2.1.0"
+        }
+      },
+      "status": "INSTALLED",
+      "is_library_for_all_clusters": false
+    },
+    {
+      "library": {
+        "pypi": {
+          "package": "azure-storage-file-datalake==12.3.1"
+        }
+      },
+      "status": "INSTALLED",
+      "is_library_for_all_clusters": false
+    },
+    {
+      "library": {
+        "maven": {
+          "coordinates": "com.microsoft.azure:azure-eventhubs-spark_2.12:2.3.15"
+        }
+      },
+      "status": "INSTALLED",
+      "is_library_for_all_clusters": false
+    }
+  ]
+}

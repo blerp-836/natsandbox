@@ -1,0 +1,102 @@
+{
+	"name": "regions pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "ytb_i18nRegions_landing_load",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/username/sandbox/adls/notebook_workflow",
+					"baseParameters": {
+						"mode": "dbfs",
+						"job": "ytb_i18nRegions",
+						"action": "landing_load",
+						"tbl": "ytb_i18nRegions"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "ytb_i18nRegions_staging",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "ytb_i18nRegions_landing_load",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/username/sandbox/adls/notebook_workflow",
+					"baseParameters": {
+						"mode": "dbfs",
+						"job": "ytb_i18nRegions",
+						"action": "staging_load_i18nRegions",
+						"tbl": "ytb_i18nRegions"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "ytb_i18nRegions_int",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "ytb_i18nRegions_staging",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/username/sandbox/adls/notebook_workflow",
+					"baseParameters": {
+						"mode": "dbfs",
+						"job": "ytb_i18nRegions",
+						"action": "int_load_i18nRegions",
+						"tbl": "ytb_i18nRegions"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-07-12T02:11:08Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
