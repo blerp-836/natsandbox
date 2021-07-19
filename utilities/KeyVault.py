@@ -49,17 +49,17 @@ class KeyVault():
                     time.sleep(wait)
                     continue
                 else:
-                    logger.error('service request error to the Azure Keyvault after {} tries '.format('4'))
+                    logger.error('unable to connect to keyvault after {} tries'.format('4'))
                     raise
                     sys.exit(1)
 
             except ClientAuthenticationError:
-                logger.error('client auth error. Authentication failed.')
+                logger.error('Client authentication error')
                 raise
                 sys.exit(1)
 
             except ResourceNotFoundError:
-                logger.error('resource not found keyvault secret: {} does not exist'.format(secret_name))
+                logger.error('resource not found. check if secret: {} exists'.format(secret_name))
                 raise
                 sys.exit(1)
 
