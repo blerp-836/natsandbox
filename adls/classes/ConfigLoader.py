@@ -25,9 +25,15 @@ class ConfigLoader():
         #print (self.config.sections())
         self.job_config=self.configpath+'/jobs/{0}/config/'.format(self.job_name)+self.config['default']['ENV'].lower()+'.ini'
         self.config.read(self.job_config)
-        print(self.config.sections())
+        #print(self.config.sections())
         return self.config
     
+    def read_table_config(self,tbl):
+        self.tbl_config=self.configpath+'/jobs/{0}/table/'.format(self.job_name)+tbl+'.ini'
+        self.config.read(self.tbl_config)
+        print(self.config.sections())
+        return self.config
+
     def write_to_job_config(self,path):
         self.config['TEMP']['temp']=path
         with open (self.job_config,'w') as configfile:

@@ -36,13 +36,6 @@ mode=dbutils.widgets.get('mode')
 
 # COMMAND ----------
 
-print (job_name)
-print(action)
-print(mode)
-print(tbl)
-
-# COMMAND ----------
-
 #configure directory for configs
 dir=f'/dbfs/mnt/{blob_account_name}/{container_name}'
 
@@ -61,11 +54,6 @@ timedlogger.create_timed_rotating_log()
 timedlogger.logger.info('=================={0}-{1}-{2}================='.format(job_name,tbl,action))
 #create time rotating logs
 timedlogger.logger.info('spark session, dbutils initiated')
-
-# COMMAND ----------
-
-
-
 
 # COMMAND ----------
 

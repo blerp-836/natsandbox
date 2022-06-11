@@ -18,3 +18,6 @@ python adls/main.py -j ytb_video -a int_load_video -t video -m local)
 
 ##video send streaming
 python adls/main.py -j ytb_video_streaming -a eventhubstreaming -t video -m local
+
+##delta lake command
+python delta/deltaMain.py -j ytb_delta_regions -a load_scd1 -t l0_dim_regions -m local

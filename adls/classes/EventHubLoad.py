@@ -19,10 +19,11 @@ class EventHubLoad():
         self.jsonLoad=JsonLoad(dbutils,spark,configLoader,logger)
         self.dbutils=dbutils
         #use dbutils when migrating to databricks
-        #self.api_key=self.dbutils.secrets.get(scope = "dbconnect-akv", key = self.configLoader.config['API']['API_KEY'])
-        self.keyVault=KeyVault.KeyVault()
-        self.api_key=self.keyVault.main(self.configLoader.config['API']['api_key'])
-        self.adls_key=self.keyVault.main(self.configLoader.config['SETTINGS']['adls_key'])
+        self.api_key=self.dbutils.secrets.get(scope = "databricks-akv", key = self.configLoader.config['API']['API_KEY'])
+        #self.keyVault=KeyVault.KeyVault()
+        #self.api_key=self.keyVault.main(self.configLoader.config['API']['api_key'])
+        self.adls_key=self.dbutils.secrets.get(scope = "databricks-akv", key = self.configLoader.config['SETTINGS']['adls_key'])
+        #self.adls_key=self.keyVault.main(self.configLoader.config['SETTINGS']['adls_key'])
         self.spark=spark
         self.request_url=eval(self.configLoader.config['API']['request_url'])
         self.country_code=self.configLoader.config['API']['country_code']

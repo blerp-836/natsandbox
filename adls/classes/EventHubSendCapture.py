@@ -13,16 +13,16 @@ class EventHubSendCapture():
         self.configLoader=configLoader
         self.dbutils=dbutils
         #use dbutils when migrating to databricks
-        #self.api_key=self.dbutils.secrets.get(scope = "dbconnect-akv", key = self.configLoader.config['API']['API_KEY'])
-        self.keyVault=KeyVault.KeyVault()
-        self.api_key=self.keyVault.main(self.configLoader.config['API']['api_key'])
+        self.api_key=self.dbutils.secrets.get(scope = "databricks-akv", key = self.configLoader.config['API']['API_KEY'])
+        #self.keyVault=KeyVault.KeyVault()
+        #self.api_key=self.keyVault.main(self.configLoader.config['API']['api_key'])
         self.request_url=eval(self.configLoader.config['API']['request_url'])
         self.country_code=self.configLoader.config['API']['country_code']
         self.next_page_token=eval(self.configLoader.config['API']['page_token'])
         self.adlsFs=AdlsFs.AdlsFs()
         self.logger=logger.logger
         self.event_hub_name=self.configLoader.config['SETTINGS']['event_hub_name']
-        self.event_hub_connstr=self.keyVault.main(self.configLoader.config['SETTINGS']['event_hub_connstr'])
+        self.event_hub_connstr=self.dbutils.secrets.get(scope='databricks-akv',key=self.configLoader.config['SETTINGS']['event_hub_connstr'])
         self.event_hub_batch_adds=eval(self.configLoader.config['SETTINGS']['event_hub_batch_num'])
     def api_request(self):
         try:
@@ -31,7 +31,7 @@ class EventHubSendCapture():
             # Builds the URL and requests the JSON from it
             request_url=self.request_url.format(page_token=page_token,country_code=country_code,api_key=self.api_key)
             
-            request = requests.get(request_url)
+            request = requests.get(request_url,stream=True,timeout=1)
             if request.status_code == 429:
                 print("Temp-Banned due to excess requests, please wait and continue later")
                 self.logger.error('request banned due to excess request. try again later')

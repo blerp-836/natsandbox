@@ -5,14 +5,29 @@
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC CREATE TABLE int_i18nRegions (id string, iso_country_code string, region_name string, extractDate date, load_date_time timestamp,
-# MAGIC  countryCode string, load_date date) USING PARQUET LOCATION 'dbfs:/mnt/natmsdnadlsdatabricks/integration/i18nRegions/incoming/';
+# MAGIC drop table if exists hive_database.int_i18nRegions;
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE TABLE hive_database.int_i18nRegions (id string, iso_country_code string, region_name string, extractDate date, load_date_time timestamp,
+# MAGIC  countryCode string, load_date date) USING PARQUET LOCATION 'abfss://integration@natmsdnadlsdatabricks.dfs.core.windows.net/i18nRegions/incoming/';
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC select * from hive_database.int_i18nRegions
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC insert overwrite table hive_database.int_i18nRegions values ('XX','XX','TEST COUNTRY',null,null,'all',null)
 
 # COMMAND ----------
 
 # MAGIC %sql
 # MAGIC CREATE TABLE int_videoCategories (id string, assignable boolean, title string, extractDate date, load_date_time timestamp,
-# MAGIC  countryCode string, load_date date) USING PARQUET LOCATION 'dbfs:/mnt/natmsdnadlsdatabricks/integration/videoCategories/incoming/';
+# MAGIC  countryCode string, load_date date) USING PARQUET LOCATION 'abfss://integration@natmsdnadlsdatabricks.dfs.core.windows.net/videoCategories/incoming/';
 
 # COMMAND ----------
 

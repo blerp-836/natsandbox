@@ -16,10 +16,10 @@ class JsonLoad():
         self.configLoader=configLoader
         self.dbutils=dbutils
         #use dbutils when migrating to databricks
-        #self.api_key=self.dbutils.secrets.get(scope = "dbconnect-akv", key = self.configLoader.config['API']['API_KEY'])
-        self.keyVault=KeyVault.KeyVault()
-        self.api_key=self.keyVault.main(self.configLoader.config['API']['api_key'])
-        self.adls_key=self.keyVault.main(self.configLoader.config['SETTINGS']['adls_key'])
+        self.api_key=self.dbutils.secrets.get(scope = "databricks-akv", key = self.configLoader.config['API']['API_KEY'])
+        #self.keyVault=KeyVault.KeyVault()
+        #self.api_key=self.keyVault.main(self.configLoader.config['API']['api_key'])
+        self.adls_key=self.dbutils.secrets.get(scope='databricks-akv',key=self.configLoader.config['SETTINGS']['adls_key'])
         self.spark=spark
         self.request_url=eval(self.configLoader.config['API']['request_url'])
         self.country_code=self.configLoader.config['API']['country_code']
@@ -56,10 +56,10 @@ class JsonLoad():
         except:
             self.logger.error('failed to create and write df from landing to staging')
             raise IOError('failed to create and write df from landing to staging')
-    
+        return 0
    
     def max_load_date_time(self,df):
-        max_time_col=df.select(self.configLoader.config['API']['key2']).groupBy().agg({'load_date':'max'}).collect()[0][0]
+        max_time_col=df.select(self.configLoader.config['API']['key2']).groupBy().agg({self.configLoader.config['API']['key2']:'max'}).collect()[0][0]
         return max_time_col
 
     def __create_video_df_from_stg(self,read_schema):
@@ -71,9 +71,9 @@ class JsonLoad():
             else:
                 df=self.spark.read.format('parquet').load(path).filter(col('countryCode')==self.country_code)
             
-            stg_max_date=self.max_load_date_time(df)
+            stg_max_load_date_time=self.max_load_date_time(df)
             
-            temp=df.select('countryCode','load_date_time','load_date',explode_outer(df.items)).withColumnRenamed('col','items').filter(col('load_date')==stg_max_date)
+            temp=df.select('countryCode','load_date_time','load_date',explode_outer(df.items)).withColumnRenamed('col','items').filter(col('load_date_time')==stg_max_load_date_time)
             temp=temp.withColumn('ratingDisabled',when(temp.items.statistics.likeCount.isNull(),lit(True)).otherwise(False)).\
                 withColumn('commentDisabled',when(temp.items.statistics.commentCount.isNull(),lit(True)).otherwise(False))
             
@@ -108,8 +108,8 @@ class JsonLoad():
             else:
                 df=self.spark.read.format('parquet').load(path).filter(col('countryCode')==self.country_code)
             
-            stg_max_date=self.max_load_date_time(df)
-            temp=df.select('countryCode','load_date_time','load_date',explode_outer(df.items)).withColumnRenamed('col','items').filter(col('load_date')==stg_max_date)
+            stg_max_load_date_time=self.max_load_date_time(df)
+            temp=df.select('countryCode','load_date_time','load_date',explode_outer(df.items)).withColumnRenamed('col','items').filter(col('load_date_time')==stg_max_load_date_time)
             #temp.select('countryCode','load_date_time','load_date',temp.items['id'],temp.items['snippet']['assignable'],temp.items['snippet']['channelId'],\
             #temp.items['snippet']['title']).createOrReplaceTempView('tempview')
             for c in temp.schema['items'].dataType:
@@ -162,9 +162,10 @@ class JsonLoad():
             num_part=eval(self.configLoader.config['SETTINGS']['num_part'])
             max_records_num=eval(self.configLoader.config['SETTINGS']['max_records_num'])
             DF.coalesce(num_part).write.mode('append').option('maxRecordsPerFile',max_records_num).partitionBy(key1,key2).format('parquet').save(path)
-        
+        return 0
     def staging_load(self,read_schema):
         self.__create_df_from_landing(self.configLoader.config['API']['key1'],self.configLoader.config['API']['key2'],'staging',read_schema)
+        return 0
 
     def int_load(self,read_schema,api_type):
         if api_type=='video':
@@ -179,7 +180,7 @@ class JsonLoad():
             DF=self.__create_dim_df_from_stg(read_schema)
             DF.printSchema()
             self.__write_to_parquet(DF,'integration',self.configLoader.config['API']['key1'],self.configLoader.config['API']['key2'])
-    
+        return 0
     
             
 

@@ -1,0 +1,8 @@
+source,source_ts,target
+id,,dim_regions_id
+iso_country_code,,dim_iso_country_code
+region_name,,dim_region_name
+extractDate,,dim_extract_date
+load_date_time,1,modified_ts
+countryCode,,
+load_date,,

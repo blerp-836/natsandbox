@@ -1,0 +1,8 @@
+source,source_ts,target
+id,,dim_video_categories_id
+assignable,,dim_assignable
+title,,dim_title
+countryCode,,
+extractDate,,dim_extract_date
+load_date_time,,
+load_date,,

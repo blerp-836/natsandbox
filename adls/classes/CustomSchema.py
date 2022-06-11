@@ -31,3 +31,11 @@ class CustomSchema():
     def stg_ytb_i18nRegions_schema():
         spark_schema=StructType([StructField('etag',StringType(),True),StructField('items',ArrayType(StructType([StructField('etag',StringType(),True),StructField('id',StringType(),True),StructField('kind',StringType(),True),StructField('snippet',StructType([StructField('gl',StringType(),True),StructField('name',StringType(),True)]),True)]),True),True),StructField('kind',StringType(),True),StructField('countryCode',StringType(),True),StructField('load_date_time',TimestampType(),True),StructField('load_date',DateType(),True)])
         return spark_schema
+    
+    @staticmethod
+    def int_ytb_i18nRegions_schema():
+        spark_schema=StructType([StructField('id',StringType(),True),StructField('iso_country_code',StringType(),True),
+        StructField('region_name',StringType(),True),StructField('extractDate',StringType(),True),
+        StructField('load_date_time',TimestampType(),True),StructField('countryCode',StringType(),True),StructField('load_date',DateType(),True)])
+        return spark_schema
+

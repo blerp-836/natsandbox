@@ -1,11 +1,5 @@
 # Batch and Streaming Pipelines using Youtube Data API on Azure
-**Disclaimer**
-All sensitive information (e.g tenant id, resource id, user name etc) has been redacted
-
- **Disclaimer**
- Opinions expressed are solely my own and do not express the views or opinions of my employer
-
-The code consists of three parts
+The code consists of two parts
 * Batch Ingestion of Youtube Data
 * Streaming Ingestion of Youtube Data
 * Serving layer using internal databricks hive metastore and unmanaged tables

@@ -1,6 +1,6 @@
-directory_id=dbutils.secrets.get(scope="dbconnect-akv",key="adls-app-registration-directory-id")
-application_id=dbutils.secrets.get(scope="dbconnect-akv",key="adls-app-registration-app-id")
-application_secret=dbutils.secrets.get(scope="dbconnect-akv",key="adls-app-registration-secret")
+directory_id=dbutils.secrets.get(scope="databricks-akv",key="adls-app-registration-directory-id")
+application_id=dbutils.secrets.get(scope="databricks-akv",key="adls-app-registration-app-id")
+application_secret=dbutils.secrets.get(scope="databricks-akv",key="adls-app-registration-secret")
 def mountAdls(container_name,storage_account_name):
   try:
     dbutils.fs.unmount(f"/mnt/{storage_account_name}/{container_name}")
@@ -29,5 +29,6 @@ if __name__ == "__main__":
   mountAdls('landing', 'natmsdnadlsdatabricks')
   mountAdls('staging', 'natmsdnadlsdatabricks')
   mountAdls('integration', 'natmsdnadlsdatabricks')
+  mountAdls('delta', 'natmsdnadlsdatabricks')
   
   

@@ -4,7 +4,7 @@ eventHubName = "eventhub02s"
 sasKeyName = dbutils.secrets.get('dbconnect-akv',"natmsdneventhub02s-sas-policy")
 sasKey = dbutils.secrets.get('dbconnect-akv',"natmsdneventhub02s-sas-key")
 conf = {}
-connectionString=dbutils.secrets.get('dbconnect-akv','natmsdneventhub-connstr-streaming')
+connectionString=dbutils.secrets.get('dbconect-akv','natmsdneventhub-connstr-streaming')
 conf['eventhubs.connectionString'] = sc._jvm.org.apache.spark.eventhubs.EventHubsUtils.encrypt(connectionString)
 
 

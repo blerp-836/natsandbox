@@ -1,6 +1,6 @@
 import os, uuid, sys,logging
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, __version__
-from azure.core.exceptions import ResourceExistsError
+from azure.core.exceptions import ResourceExistsError, ResourceNotFoundError
 
 from pathlib import Path
 import configparser
@@ -21,6 +21,10 @@ class BlobStorage():
     def create_container(self,container_name):
         self.blob_service_client.create_container(container_name)
     
+    def delete_container(self,container_name):
+        self.container_client=self.blob_service_client.get_container_client(container_name)
+        self.container_client.delete_container()
+
     def get_container_client(self,container_name):
         try:
             self.create_container(container_name)
@@ -61,9 +65,17 @@ class BlobStorage():
                 self.container_client.upload_blob(name=dest, data=data)
             except ResourceExistsError as e:
                 print(e)
-                print ('going to the next blob')
-                pass
-            except:
+                try:
+                    print ('getting blob client')
+                    self.blob_client=self.container_client.get_blob_client(dest)
+                    print('deleting blob')
+                    self.blob_client.delete_blob()
+                    print('uploading new blob')
+                    self.container_client.upload_blob(name=dest, data=data)
+                except:
+                    raise IOError
+                
+            except Exception as e:
                 raise IOError
 
     def upload_dir(self, source, dest,skipLevel):
@@ -84,4 +96,27 @@ class BlobStorage():
 if __name__=='__main__':
     blob=BlobStorage()
     #blob.get_container_client('deploy')
-    blob.upload('/home/natmsdnadmin/develop/sandbox/adls/jobs','deploy',True)
+    try:
+        #print('container already exists')
+        print('deleting container')
+        blob.delete_container('deploy')
+        import time
+        time.sleep(120)
+
+        
+    except ResourceNotFoundError as e:
+        print('container does not not exists. pass')
+        try:
+            #sleep(120)
+            blob.upload('/home/natmsdnadmin/develop/sandbox/adls/jobs','deploy',True)
+        
+        except:
+            raise IOError
+    
+
+
+
+
+
+            
+        
