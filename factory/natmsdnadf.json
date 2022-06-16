@@ -1,9 +1,0 @@
-{
-	"name": "natmsdnadf",
-	"location": "canadacentral",
-	"identity": {
-		"type": "SystemAssigned",
-		"principalId": "redacted",
-		"tenantId": "redacted"
-	}
-}
