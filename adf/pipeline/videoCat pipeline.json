@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Repos/natalia.theodora@accenture.com/sandbox/adls/notebook_workflow",
+					"notebookPath": "/Repos/redacted/sandbox/adls/notebook_workflow",
 					"baseParameters": {
 						"mode": "dbfs",
 						"job": "ytb_videoCat",
@@ -48,7 +48,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Repos/natalia.theodora@accenture.com/sandbox/adls/notebook_workflow",
+					"notebookPath": "/Repos/redacted/sandbox/adls/notebook_workflow",
 					"baseParameters": {
 						"mode": "dbfs",
 						"job": "ytb_videoCat",
@@ -81,7 +81,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Repos/natalia.theodora@accenture.com/sandbox/adls/notebook_workflow",
+					"notebookPath": "/Repos/redacted/sandbox/adls/notebook_workflow",
 					"baseParameters": {
 						"mode": "dbfs",
 						"job": "ytb_videoCat",
