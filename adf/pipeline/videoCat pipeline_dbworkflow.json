@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Repos/natalia.theodora@accenture.com/sandbox/adls/videoCat_workflow"
+					"notebookPath": "/Repos/redacted/sandbox/adls/videoCat_workflow"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureDatabricks1",
